@@ -18,15 +18,27 @@ class App extends Component {
       isLike: false,
       isNotLike: false,
     }
+    this.api = '';
   }
 
   componentDidMount() {
+    this.getApi();
     this.getUrl();
   }
 
+  getApi = () => {
+    const hostname = window.location.hostname
+    if(hostname.indexOf(107) !== -1){
+      this.api = '192.168.1.107'
+    }else{
+      this.api = '192.168.1.101'
+    }
+  }
+
   getUrl = () => {
+    
     axios
-      .get("http://192.168.1.101:8090/video/list")
+      .get(`http://${this.api}:8090/video/list`)
       .then(res => {
         this.setState({
           videoData: res.data,
@@ -80,7 +92,7 @@ class App extends Component {
       isLike: true
     });
     console.log(this);
-    axios.post('http://192.168.1.101:8090/video/rate', {
+    axios.post(`http://${this.api}:8090/video/rate`, {
       id: this.state.videoData[this.state.curVideoIndex].id,
       downOrUp: 1
     });
@@ -93,7 +105,7 @@ class App extends Component {
   delete = () => {
     var params = new URLSearchParams();
       params.append('id', this.state.videoData[this.state.curVideoIndex].id);
-    axios.get('http://192.168.1.101:8090/video/delete',params)
+    axios.get(`http://${this.api}:8090/video/delete`,params)
     .then(function(response) {
       console.log(response);
     })
@@ -109,7 +121,7 @@ class App extends Component {
       this.setState({
         isNotLike: true
       });
-    axios.post('http://192.168.1.101:8090/video/rate', {
+    axios.post(`http://${this.api}:8090/video/rate`, {
       id: this.state.videoData[this.state.curVideoIndex].id,
       downOrUp: 0
     });
