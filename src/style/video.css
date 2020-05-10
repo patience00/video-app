@@ -1,0 +1,15 @@
+.cardList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.videoContainer{
+    /*margin-left:50%;*/
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
