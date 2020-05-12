@@ -18,6 +18,7 @@ export default class VideoPlay extends Component {
             isLike: false,
             isNotLike: false,
             playRate: 1,
+            curId:0
         }
     }
 
@@ -27,6 +28,7 @@ export default class VideoPlay extends Component {
 
     getVideo = () => {
         const id = this.props.match.params.id;
+        this.setState({curId: id})
         console.log("视频id:" + id);
         axios.get(api + '/video/' + id, {})
             .then((response) => {
@@ -76,9 +78,9 @@ export default class VideoPlay extends Component {
         this.setState({
             isLike: true
         });
-        console.log(this);
+        console.log('id='+this.state.curId);
         axios.post(api + '/video/rate', {
-            id: this.state.videoData[this.state.curVideoIndex].id,
+            id: this.state.curId,
             downOrUp: 1
         });
         this.setState({
