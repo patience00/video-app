@@ -22,6 +22,7 @@ export default class VideoList extends Component {
             isLike: false,
             isNotLike: false,
         }
+        this.timer = null;
     }
 
     componentDidMount() {
@@ -29,7 +30,6 @@ export default class VideoList extends Component {
     }
 
     getUrl = (pageNumber) => {
-        console.log("请求第" + pageNumber + "页");
         axios.get(api + '/video/list/page', {
             params: {
                 pageIndex: pageNumber,

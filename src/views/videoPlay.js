@@ -78,7 +78,6 @@ export default class VideoPlay extends Component {
         this.setState({
             isLike: true
         });
-        console.log('id='+this.state.curId);
         axios.post(api + '/video/rate', {
             id: this.state.curId,
             downOrUp: 1
@@ -119,8 +118,8 @@ export default class VideoPlay extends Component {
             isNotLike: true
         });
         axios.post(api + '/video/rate', {
-            id: this.state.videoData[this.state.curVideoIndex].id,
-            downOrUp: 0
+            id: this.state.curId,
+            downOrUp: 1
         });
         this.setState({
             score: 0
