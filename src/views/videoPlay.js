@@ -133,7 +133,7 @@ export default class VideoPlay extends Component {
 
     // 关机
     shutdown = () => {
-        axios.get('localhost:8000/shut')
+        axios.get(api + '/shut')
             .then(function (response) {
                 console.log(response);
             })
