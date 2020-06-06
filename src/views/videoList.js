@@ -84,7 +84,10 @@ export default class VideoList extends Component {
                                       key={item.name}
                                       title={item.name}
                                       cover={<img alt="example" src={item.image}
-                                                  onScroll={(e) => this.reset(e, item.image)}/>}
+                                                  onMouseMove={(e) => this.reset(e, item.image)}
+                                                  onPlaying={(e) => this.reset(e, item.image)}
+                                                  onTouchMove={(e) => this.reset(e, item.image)}
+                                                  onTouchStart={(e) => this.reset(e, item.image)}/>}
                                       type={'inner'}>
                                     <div className="ls-title article-title">{item.name}</div>
                                 </Card>
