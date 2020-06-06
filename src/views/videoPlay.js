@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Icon, InputNumber} from 'antd';
+import {Icon, InputNumber, Button} from 'antd';
 import {api} from '../common/commonData';
 import axios from 'axios';
 import '../style/video.css';
-
 
 export default class VideoPlay extends Component {
 
@@ -18,8 +17,11 @@ export default class VideoPlay extends Component {
             isLike: false,
             isNotLike: false,
             playRate: 1,
-            curId:0
+            curId: 0
         }
+        const id = this.props.match.params.id;
+        this.idStack = [];
+        this.idStack.push(id);
     }
 
     componentDidMount() {
@@ -27,7 +29,7 @@ export default class VideoPlay extends Component {
     }
 
     getVideo = () => {
-        const id = this.props.match.params.id;
+        const id = this.idStack[0];
         this.setState({curId: id})
         console.log("视频id:" + id);
         axios.get(api + '/video/' + id, {})
@@ -40,39 +42,69 @@ export default class VideoPlay extends Component {
                 console.log(response);
             });
     }
-    //
-    // lastVideo = () => {
-    //     if (this.state.curVideoIndex === 0) {
-    //         message.info('已经是第一个')
-    //     } else {
-    //         this.setState({
-    //             url: this.state.videoData[this.state.curVideoIndex - 1].url,
-    //             curVideoIndex: this.state.curVideoIndex - 1,
-    //             curScore: this.state.videoData[this.state.curVideoIndex - 1].rate,
-    //             tempPage: this.state.curVideoIndex - 1,
-    //             score: 0,
-    //             isLike: false,
-    //             isNotLike: false
-    //         });
-    //         console.log(this.state.isLike);
-    //     }
-    // }
-    //
-    // nextVideo = () => {
-    //     if (this.state.curVideoIndex === this.state.videoData.length - 1) {
-    //         message.info('已经是最后一个')
-    //     } else {
-    //         this.setState({
-    //             url: this.state.videoData[this.state.curVideoIndex + 1].url,
-    //             curVideoIndex: this.state.curVideoIndex + 1,
-    //             curScore: this.state.videoData[this.state.curVideoIndex + 1].rate,
-    //             tempPage: this.state.curVideoIndex + 1,
-    //             score: 0,
-    //             isLike: false,
-    //             isNotLike: false
-    //         });
-    //     }
-    // }
+
+    lastVideo = () => {
+        // if (this.state.curVideoIndex === 0) {
+        //     message.info('已经是第一个')
+        // } else {
+        //     this.setState({
+        //         url: this.state.videoData[this.state.curVideoIndex - 1].url,
+        //         curVideoIndex: this.state.curVideoIndex - 1,
+        //         curScore: this.state.videoData[this.state.curVideoIndex - 1].rate,
+        //         tempPage: this.state.curVideoIndex - 1,
+        //         score: 0,
+        //         isLike: false,
+        //         isNotLike: false
+        //     });
+        //     console.log(this.state.isLike);
+        // }
+        var nowId = this.idStack.pop();
+        var lastId = nowId - 1;
+        this.idStack.push(lastId);
+        // this.props.history.push('/video/play/' + lastId)
+        this.setState({curId: lastId})
+        console.log("视频id:" + lastId);
+        axios.get(api + '/video/' + lastId, {})
+            .then((response) => {
+                this.setState({
+                    url: response.data.url
+                })
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
+    }
+
+    nextVideo = () => {
+        // if (this.state.curVideoIndex === this.state.videoData.length - 1) {
+        //     // message.info('已经是最后一个')
+        // } else {
+        //     this.setState({
+        //         url: this.state.videoData[this.state.curVideoIndex + 1].url,
+        //         curVideoIndex: this.state.curVideoIndex + 1,
+        //         curScore: this.state.videoData[this.state.curVideoIndex + 1].rate,
+        //         tempPage: this.state.curVideoIndex + 1,
+        //         score: 0,
+        //         isLike: false,
+        //         isNotLike: false
+        //     });
+        // }
+        var nowId = this.idStack.pop();
+        var nextId = nowId + 1;
+        this.idStack.push(nextId);
+        // this.props.history.push('/video/play/' + nextId);
+        this.setState({curId: nextId})
+        console.log("视频id:" + nextId);
+        axios.get(api + '/video/' + nextId, {})
+            .then((response) => {
+                this.setState({
+                    url: response.data.url
+                })
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
+    }
 
     up = () => {
         this.setState({
@@ -101,7 +133,7 @@ export default class VideoPlay extends Component {
 
     // 关机
     shutdown = () => {
-        axios.get(api + '/video/shutdown')
+        axios.get('localhost:8000/shut')
             .then(function (response) {
                 console.log(response);
             })
@@ -165,7 +197,7 @@ export default class VideoPlay extends Component {
             <div className="videoContainer">
                 {
                     this.state.url
-                        ? <video width="50%" src={this.state.url} controls></video>
+                        ? <video src={this.state.url} controls></video>
                         // ? <ReactPlayer url={this.state.url}
                         //                controls={true}
                         //                style={{margin: '0 auto'}}
@@ -186,12 +218,12 @@ export default class VideoPlay extends Component {
                 <span>播放速度:</span>
                 <InputNumber min={1} max={2} step={0.5} defaultValue={1} onChange={this.playrate}/>
                 <div className="video-mt20">
-                    {/*<Button type="primary" onClick={this.lastVideo}>上一个</Button>*/}
+                    <Button type="primary" onClick={this.lastVideo}>上一个</Button>
                     {/*<span className="video-a-bSpan">{this.state.curVideoIndex + 1}</span>/<span*/}
                     {/*className="video-a-bSpan">{this.state.videoData.length}</span>*/}
-                    {/*<Button type="primary" onClick={this.nextVideo}>下一个</Button><span>  </span>*/}
+                    <Button type="primary" onClick={this.nextVideo}>下一个</Button><span>  </span>
                     {/*<Button type="primary" onClick={this.delete}>删除</Button>*/}
-                    {/*<Button type="primary" onClick={this.shutdown}>关机</Button>*/}
+                    <Button type="primary" onClick={this.shutdown}>关机</Button>
                 </div>
                 {/*<div className="video-mt20">*/}
                 {/*    跳转到：<InputNumber value={this.state.tempPage + 1} onChange={this.changePage}/>*/}
@@ -199,5 +231,31 @@ export default class VideoPlay extends Component {
                 {/*</div>*/}
             </div>
         )
+    }
+}
+
+//使用线性表实现
+function Stack() {
+    var stack = [];
+    this.push = element => stack.push(element);
+    this.pop = () => stack.pop();
+    this.length = () => stack.length;
+    this.top = () => {
+        if (stack.length) {
+            return stack[stack.length - 1];
+        }
+        return "stack empty"
+    }
+    this.clear = () => {
+        stack.length = 0;
+        return true;
+    }
+    this.toString = () => {
+        if (stack.length) {
+            stack.reverse();
+            return stack.join(" ");
+        }
+        return "stack empty"
+
     }
 }

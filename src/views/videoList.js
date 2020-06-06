@@ -69,6 +69,10 @@ export default class VideoList extends Component {
         e.target.src = url;
     }
 
+    refreshGif = (e) => {
+
+    }
+
     render() {
         return (
             <div className="cardList">
@@ -76,9 +80,11 @@ export default class VideoList extends Component {
                     {
                         this.state.curList.map(item => (
                             <Link to={`/video/play/${item.id}`}>
-                                <Card bordered={true} style={{width: 300,marginTop:20}} hoverable={true} key={item.name}
+                                <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
+                                      key={item.name}
                                       title={item.name}
-                                      cover={<img alt="example" src={item.image} onMouseEnter={(e) => this.reset(e, item.image)} />}
+                                      cover={<img alt="example" src={item.image}
+                                                  onScroll={(e) => this.reset(e, item.image)}/>}
                                       type={'inner'}>
                                     <div className="ls-title article-title">{item.name}</div>
                                 </Card>
