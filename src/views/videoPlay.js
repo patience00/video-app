@@ -136,8 +136,12 @@ export default class VideoPlay extends Component {
         axios.get(api + '/video/shut')
             .then(function (response) {
                 console.log(response);
+                if (response.status === 200 && response.data === 'ok') {
+                    alert("一分钟后关机");
+                }
             })
             .catch(function (response) {
+                alert("关机失败");
                 console.log(response);
             });
     }

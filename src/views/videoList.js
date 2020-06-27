@@ -8,8 +8,8 @@ import {api} from '../common/commonData';
 
 export default class VideoList extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             curList: [],   //当前页列表
             current: 1,    //当前页
@@ -23,10 +23,12 @@ export default class VideoList extends Component {
             isNotLike: false,
         }
         this.timer = null;
+        this.localIndex = this.props.match.params.pageIndex;
+
     }
 
     componentDidMount() {
-        this.getUrl(1);
+        this.getUrl(this.localIndex);
     }
 
     getUrl = (pageNumber) => {
@@ -51,6 +53,7 @@ export default class VideoList extends Component {
         this.setState({
             current: pageNumber
         })
+        this.props.history.push('/video/list/' + pageNumber);
         this.getUrl(pageNumber);
     }
 

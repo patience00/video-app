@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
         <Switch>
-          <Route path="/video/list" component={VideoList}/>
+          <Route path="/video/list/:pageIndex" component={VideoList}/>
           <Route path="/video/play/:id" component={VideoPlay}/>
-          <Redirect to="/video/list"/>
+          <Redirect to="/video/list/1"/>
         </Switch>
     );
   }
