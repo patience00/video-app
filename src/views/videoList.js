@@ -24,11 +24,12 @@ export default class VideoList extends Component {
         }
         this.timer = null;
         this.localIndex = this.props.match.params.pageIndex;
-
     }
 
     componentDidMount() {
+        this.localIndex = this.props.match.params.pageIndex;
         this.getUrl(this.localIndex);
+        this.jump(this.localIndex);
     }
 
     getUrl = (pageNumber) => {
@@ -100,13 +101,14 @@ export default class VideoList extends Component {
                     }
                 </div>
                 <div className="ls-pageBox">
-                    <Pagination pageSize={this.state.pageSize}
+                    <Pagination current={this.localIndex}
+                                pageSize={this.state.pageSize}
                                 showSizeChanger
                                 onShowSizeChange={this.onShowSizeChange}
                                 showQuickJumper total={this.state.pageNumber}
                                 onChange={this.jump}/>
                 </div>
             </div>
-        )
+        );
     }
 }

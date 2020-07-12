@@ -201,7 +201,7 @@ export default class VideoPlay extends Component {
             <div className="videoContainer">
                 {
                     this.state.url
-                        ? <video src={this.state.url} controls></video>
+                        ? <video width="50%" src={this.state.url} controls></video>
                         // ? <ReactPlayer url={this.state.url}
                         //                controls={true}
                         //                style={{margin: '0 auto'}}
