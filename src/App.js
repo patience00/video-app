@@ -6,11 +6,12 @@ import VideoPlay from "./views/videoPlay";
 
 class App extends Component {
   render() {
+      console.log('env='+process.env.NODE_ENV);
     return (
         <Switch>
-          <Route path="/video/list/:pageIndex" component={VideoList}/>
+          <Route path="/video/list" component={VideoList}/>
           <Route path="/video/play/:id" component={VideoPlay}/>
-          <Redirect to="/video/list/1"/>
+          <Redirect to="/video/list"/>
         </Switch>
     );
   }

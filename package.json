@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.13.0",
     "axios": "^0.18.0",
+    "process": "^0.11.10",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-player": "^1.14.2",
@@ -12,8 +13,10 @@
     "react-scripts": "2.1.3"
   },
   "scripts": {
+    "dev": "react-scripts serve --mode dev",
+    "build-prod": "react-scripts build --mode prod",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --mode dev",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

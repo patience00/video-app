@@ -12,9 +12,9 @@ export default class VideoList extends Component {
         super(props);
         this.state = {
             curList: [],   //当前页列表
-            current: 1,    //当前页
+            current: parseInt(localStorage.getItem('videoPage')),    //当前页
             // pageIndex: 0,
-            pageNumber: 0,
+            total: 0,
             pageSize: 20,
             videoData: [],   //视频列表
             curVideoIndex: 0,    //当前视频index
@@ -22,17 +22,21 @@ export default class VideoList extends Component {
             isLike: false,
             isNotLike: false,
         }
-        this.timer = null;
-        this.localIndex = this.props.match.params.pageIndex;
+        // this.localIndex = this.props.match.params.pageIndex;
     }
 
     componentDidMount() {
-        this.localIndex = this.props.match.params.pageIndex;
-        this.getUrl(this.localIndex);
-        this.jump(this.localIndex);
+        // this.localIndex = this.props.match.params.pageIndex;
+        // console.log("this.localIndex =" + this.localIndex);
+        this.getUrl(this.state.current);
+        // this.getUrl(this.localIndex);
+        // this.jump(this.localIndex);
     }
 
     getUrl = (pageNumber) => {
+        this.setState({
+            current: pageNumber
+        });
         axios.get(api + '/video/list/page', {
             params: {
                 pageIndex: pageNumber,
@@ -41,7 +45,7 @@ export default class VideoList extends Component {
         }).then((res) => {
             this.setState({
                 curList: res.data.data,
-                pageNumber: res.data.count,
+                total: res.data.count,
                 curVideoIndex: 0,
                 tempPage: 0
             });
@@ -50,16 +54,14 @@ export default class VideoList extends Component {
         });
     }
 
-    jump = (pageNumber) => {
-        this.setState({
-            current: pageNumber
-        })
-        this.props.history.push('/video/list/' + pageNumber);
-        this.getUrl(pageNumber);
+    jump = (id) => {
+        localStorage.setItem('videoPage', this.state.current);
+        this.props.history.push(`/video/play/${id}`);
     }
 
     onShowSizeChange = (current, newPageSize) => {
         this.setState({
+            current: current,
             pageSize: newPageSize
         })
     }
@@ -78,35 +80,34 @@ export default class VideoList extends Component {
     }
 
     render() {
+        console.log(this.state.current)
         return (
             <div className="cardList">
                 <div>
                     {
                         this.state.curList.map(item => (
-                            <Link to={`/video/play/${item.id}`}>
-                                <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
-                                      key={item.name}
-                                      title={item.name}
-                                      cover={<img alt="example" src={item.image}
-                                                  onMouseMove={(e) => this.reset(e, item.image)}
-                                                  onPlaying={(e) => this.reset(e, item.image)}
-                                                  onTouchMove={(e) => this.reset(e, item.image)}
-                                                  onTouchStart={(e) => this.reset(e, item.image)}/>}
-                                      type={'inner'}>
-                                    <div className="ls-title article-title">{item.name}</div>
-                                </Card>
-                            </Link>
-                            // </div>
+                            <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
+                                  key={item.name}
+                                  onClick={() => this.jump(item.id)}
+                                  title={item.name}
+                                  cover={<img alt="example" src={item.image}
+                                              onMouseMove={(e) => this.reset(e, item.image)}
+                                              onPlaying={(e) => this.reset(e, item.image)}
+                                              onTouchMove={(e) => this.reset(e, item.image)}
+                                              onTouchStart={(e) => this.reset(e, item.image)}/>}
+                                  type={'inner'}>
+                                <div className="ls-title article-title">{item.name}</div>
+                            </Card>
                         ))
                     }
                 </div>
                 <div className="ls-pageBox">
-                    <Pagination current={this.localIndex}
+                    <Pagination current={this.state.current}
                                 pageSize={this.state.pageSize}
                                 showSizeChanger
                                 onShowSizeChange={this.onShowSizeChange}
-                                showQuickJumper total={this.state.pageNumber}
-                                onChange={this.jump}/>
+                                showQuickJumper total={this.state.total}
+                                onChange={this.getUrl}/>
                 </div>
             </div>
         );
