@@ -21,6 +21,8 @@ export default class VideoList extends Component {
             tempPage: 0,    //页数跳转输入框
             isLike: false,
             isNotLike: false,
+            orderField: 'up',
+            orderType: 'DESC',
         }
         // this.localIndex = this.props.match.params.pageIndex;
     }
@@ -28,19 +30,30 @@ export default class VideoList extends Component {
     componentDidMount() {
         // this.localIndex = this.props.match.params.pageIndex;
         // console.log("this.localIndex =" + this.localIndex);
-        this.getUrl(this.state.current);
+        this.getUrl(this.state.current, this.state.orderType, this.state.orderField);
         // this.getUrl(this.localIndex);
         // this.jump(this.localIndex);
     }
 
-    getUrl = (pageNumber) => {
+    changeSortField = (orderField, orderType) => {
+        console.log("排序:" + orderField + "+" + orderType);
+        this.getUrl(this.state.current, orderType, orderField);
+    };
+
+    changePageSize = (pageNumber) => {
+        this.getUrl(pageNumber, this.state.orderType, this.state.orderField);
+    }
+
+    getUrl = (pageNumber, orderType, orderField) => {
         this.setState({
             current: pageNumber
         });
         axios.get(api + '/video/list/page', {
             params: {
                 pageIndex: pageNumber,
-                pageSize: 20
+                pageSize: 20,
+                orderType: orderType,
+                orderField: orderField
             }
         }).then((res) => {
             this.setState({
@@ -83,6 +96,39 @@ export default class VideoList extends Component {
         console.log(this.state.current)
         return (
             <div className="cardList">
+                <div className="sortBox">
+                    <div className="sortField">
+                        <span>创建时间</span>
+                        <div className="sortFont">
+                            <a href="#" onClick={() => this.changeSortField('createTime', 'ASC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-up-filling"></use>
+                                </svg>
+                            </a>
+                            <a href="#" onClick={() => this.changeSortField('createTime', 'DESC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-down-filling"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="sortField">
+                        <span>好评</span>
+                        <div className="sortFont">
+                            <a href="#" onClick={() => this.changeSortField('up', 'ASC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-up-filling"></use>
+                                </svg>
+                            </a>
+                            <a href="#" onClick={() => this.changeSortField('up', 'DESC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-down-filling"></use>
+                                </svg>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
                 <div>
                     {
                         this.state.curList.map(item => (
@@ -107,7 +153,7 @@ export default class VideoList extends Component {
                                 showSizeChanger
                                 onShowSizeChange={this.onShowSizeChange}
                                 showQuickJumper total={this.state.total}
-                                onChange={this.getUrl}/>
+                                onChange={this.changePageSize}/>
                 </div>
             </div>
         );

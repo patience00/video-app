@@ -13,3 +13,19 @@
     justify-content: center;
 
 }
+
+.sortFont{
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.sortField{
+    display: flex;
+    flex-direction: row;
+}
+.sortBox{
+    display: flex;
+    flex-direction: row;
+}
