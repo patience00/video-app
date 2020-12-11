@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Card, Pagination} from 'antd';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../style/video.css';
 import {api} from '../common/commonData';
@@ -12,7 +11,7 @@ export default class VideoList extends Component {
         super(props);
         this.state = {
             curList: [],   //当前页列表
-            current: parseInt(localStorage.getItem('videoPage')),    //当前页
+            current: parseInt(localStorage.getItem('videoPage') == null ? 1 : localStorage.getItem('videoPage')),    //当前页
             // pageIndex: 0,
             total: 0,
             pageSize: 20,
