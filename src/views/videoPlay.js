@@ -121,10 +121,13 @@ export default class VideoPlay extends Component {
 
     delete = () => {
         console.log("id:", this.props.match.params.id);
-        var params = new URLSearchParams();
-        params.append('id', this.props.match.params.id);
-        axios.get(api + '/video/delete', params)
+        axios.get(api + '/video/delete', {
+            params: {
+                id: this.props.match.params.id
+            }
+        })
             .then(function (response) {
+                alert(response.data.message);
                 console.log(response);
             })
             .catch(function (response) {
