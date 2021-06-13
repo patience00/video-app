@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Pagination} from 'antd';
+import {Card, Icon, Pagination} from 'antd';
 import axios from 'axios';
 import '../style/video.css';
 import {api} from '../common/commonData';
@@ -135,13 +135,20 @@ export default class VideoList extends Component {
                                   key={item.name}
                                   onClick={() => this.jump(item.id)}
                                   title={item.name}
-                                  cover={<img alt="example" src={item.image}
-                                              onMouseMove={(e) => this.reset(e, item.image)}
-                                              onPlaying={(e) => this.reset(e, item.image)}
-                                              onTouchMove={(e) => this.reset(e, item.image)}
-                                              onTouchStart={(e) => this.reset(e, item.image)}/>}
+                                  cover={<img alt="example" src={item.image}/>}
                                   type={'inner'}>
-                                <div className="ls-title article-title">{item.name}</div>
+                                <div className="ls-title article-title">
+                                    <span>
+                                        {item.viewTime}次观看
+                                    </span>
+                                    <span>
+                                         <Icon type="like" style={{fontSize: '20px', color: '#08c'}}
+                                               theme={'outlined'}/>
+                                               <span>
+                                                   {item.rate}%
+                                               </span>
+                                    </span>
+                                </div>
                             </Card>
                         ))
                     }
