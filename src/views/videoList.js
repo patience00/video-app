@@ -56,7 +56,7 @@ export default class VideoList extends Component {
             }
         }).then((res) => {
             this.setState({
-                curList: res.data.data,
+                curList: res.data.data.data,
                 total: res.data.count,
                 curVideoIndex: 0,
                 tempPage: 0

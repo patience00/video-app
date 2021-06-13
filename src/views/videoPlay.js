@@ -35,7 +35,7 @@ export default class VideoPlay extends Component {
         axios.get(api + '/video/' + id, {})
             .then((response) => {
                 this.setState({
-                    url: response.data.url
+                    url: response.data.data.url
                 })
             })
             .catch(function (response) {
@@ -67,7 +67,7 @@ export default class VideoPlay extends Component {
         axios.get(api + '/video/' + lastId, {})
             .then((response) => {
                 this.setState({
-                    url: response.data.url
+                    url: response.data.data.url
                 })
             })
             .catch(function (response) {
@@ -98,7 +98,7 @@ export default class VideoPlay extends Component {
         axios.get(api + '/video/' + nextId, {})
             .then((response) => {
                 this.setState({
-                    url: response.data.url
+                    url: response.data.data.url
                 })
             })
             .catch(function (response) {
@@ -136,7 +136,7 @@ export default class VideoPlay extends Component {
         axios.get(api + '/video/shut')
             .then(function (response) {
                 console.log(response);
-                if (response.status === 200 && response.data === 'ok') {
+                if (response.status === 200 && response.data.data === 'ok') {
                     alert("一分钟后关机");
                 }
             })
@@ -226,7 +226,7 @@ export default class VideoPlay extends Component {
                     {/*<span className="video-a-bSpan">{this.state.curVideoIndex + 1}</span>/<span*/}
                     {/*className="video-a-bSpan">{this.state.videoData.length}</span>*/}
                     <Button type="primary" onClick={this.nextVideo}>下一个</Button><span>  </span>
-                    {/*<Button type="primary" onClick={this.delete}>删除</Button>*/}
+                    <Button type="primary" onClick={this.delete}>删除</Button>
                     <Button type="primary" onClick={this.shutdown}>关机</Button>
                 </div>
                 {/*<div className="video-mt20">*/}
