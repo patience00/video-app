@@ -26,6 +26,12 @@ export default class VideoPlay extends Component {
 
     componentDidMount() {
         this.getVideo();
+        this.timerId = setInterval(() => this.heartBeat(), 5000);
+    }
+    
+    
+    componentWillUnmount() {
+        clearInterval(this.timerId)
     }
 
     getVideo = () => {
@@ -42,6 +48,14 @@ export default class VideoPlay extends Component {
                 console.log(response);
             });
     }
+    
+    heartBeat() {
+        console.log("beat:", new Date());
+        axios.get(api + '/video/heartbeat', {}).then((res) => {
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }    
 
     lastVideo = () => {
         // if (this.state.curVideoIndex === 0) {
