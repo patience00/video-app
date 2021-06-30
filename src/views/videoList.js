@@ -32,6 +32,20 @@ export default class VideoList extends Component {
         this.getUrl(this.state.current, this.state.orderType, this.state.orderField);
         // this.getUrl(this.localIndex);
         // this.jump(this.localIndex);
+        this.timerId = setInterval(() => this.heartBeat(), 5000);
+    }
+    
+    
+    componentWillUnmount() {
+        clearInterval(this.timerId)
+    }
+
+     heartBeat() {
+        console.log("beat:", new Date());
+        axios.get(api + '/video/heartbeat', {}).then((res) => {
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     changeSortField = (orderField, orderType) => {
