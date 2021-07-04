@@ -3,6 +3,7 @@ import {Icon, InputNumber, Button} from 'antd';
 import {api} from '../common/commonData';
 import axios from 'axios';
 import '../style/video.css';
+import Player from 'griffith';
 
 export default class VideoPlay extends Component {
 
@@ -22,6 +23,14 @@ export default class VideoPlay extends Component {
         const id = this.props.match.params.id;
         this.idStack = [];
         this.idStack.push(id);
+        const sources = {
+            hd: {
+                play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018hd.mp4',
+            },
+            sd: {
+                play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018sd.mp4',
+            },
+        }
     }
 
     componentDidMount() {
@@ -219,13 +228,18 @@ export default class VideoPlay extends Component {
             <div className="videoContainer">
                 {
                     this.state.url
-                        ? <video width="50%" src={this.state.url} controls></video>
-                        // ? <ReactPlayer url={this.state.url}
-                        //                controls={true}
-                        //                style={{margin: '0 auto'}}
-                        //                width={720}
-                        //                playbackRate={this.state.playRate}
-                        // />
+                        // ? <video width="50%" src={this.state.url} controls></video>
+                        ? <Player id={this.props.match.params.id}
+                                  sources = {{
+                                      hd: {
+                                      play_url: this.state.url
+                                  },
+                                      sd: {
+                                      play_url: this.state.url,
+                                  },
+                                  }}
+                                  defaultQuality='hd'
+                        />
                         : null
                 }
                 <div>好评率：{this.state.curScore}%</div>
