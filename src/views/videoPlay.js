@@ -246,9 +246,9 @@ export default class VideoPlay extends Component {
                 </div>
                 <div className="tag-list">
                     {
-                        this.state.curTags.map(item => (
+                        this.state.curTags===null? this.state.curTags.map(item => (
                             <Tag color={this.colorArray[Math.floor(Math.random() * 10)]}>{item}</Tag>
-                        ))
+                        )) : null
                     }
                 </div>
 
