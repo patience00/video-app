@@ -29,3 +29,9 @@
     display: flex;
     flex-direction: row;
 }
+.tag-list{
+    margin: 10px 20px;
+}
+.write-tags{
+    width: 300px;
+}

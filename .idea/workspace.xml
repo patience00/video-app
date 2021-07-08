@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2eca37c0-a274-43e3-bd3d-afddccff19c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/video.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/video.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/videoPlay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/videoPlay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <list id="96ee33eb-c1c2-4cff-a624-ffedb49d0d49" name="ignore" comment="">
+      <change beforePath="$PROJECT_DIR$/src/common/commonData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/commonData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,17 +36,19 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
-  </component>
+  <component name="ProjectId" id="1uzNxNoQMtb2zybuaBp4NjQOmL9" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -54,6 +59,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\work\workspace\judy\video-app\node_modules\prettier" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
@@ -67,12 +73,14 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2eca37c0-a274-43e3-bd3d-afddccff19c7" name="Default Changelist" comment="" />
+      <changelist id="96ee33eb-c1c2-4cff-a624-ffedb49d0d49" name="ignore" comment="" />
       <created>1563097281758</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -111,6 +119,8 @@
       <workItem from="1604663464885" duration="2839000" />
       <workItem from="1606919047281" duration="635000" />
       <workItem from="1607096431285" duration="974000" />
+      <workItem from="1625664706828" duration="3327000" />
+      <workItem from="1625749494092" duration="3838000" />
     </task>
     <task id="LOCAL-00001" summary="视频预览和播放,修改">
       <created>1589107696691</created>
@@ -189,11 +199,18 @@
       <option name="project" value="LOCAL" />
       <updated>1594561276198</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="使用知乎的griffith播放器">
+      <created>1625390931471</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1625390931471</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -219,24 +236,41 @@
     <MESSAGE value="url修改" />
     <MESSAGE value="可以返回上个页面" />
     <MESSAGE value="fenye" />
-    <option name="LAST_COMMIT_MESSAGE" value="fenye" />
+    <MESSAGE value="使用知乎的griffith播放器" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用知乎的griffith播放器" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1625390256240">
+    <state x="558" y="84" key="CommitChangelistDialog2" timestamp="1625390930063">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390256240" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1625390256239">
+    <state x="558" y="84" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390930063" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1625750865003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390256239" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1625390256239">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625750865003" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1625750865003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390256239" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1625390256240">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625750865003" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1625750865003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390256240" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625750865003" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1625750865003">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625750865003" />
+    <state x="790" y="389" key="VCS.EditChangelistDialog" timestamp="1625669437004">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625669437004" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1625390933517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390933517" />
+    <state x="662" y="252" width="596" height="536" key="find.popup" timestamp="1625750459856">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="662" y="252" width="596" height="536" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625750459856" />
   </component>
 </project>
