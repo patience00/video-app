@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Icon, Pagination} from 'antd';
+import {Card, Icon, Pagination, Tag} from 'antd';
 import axios from 'axios';
 import '../style/video.css';
 import {api} from '../common/commonData';
@@ -22,6 +22,7 @@ export default class VideoList extends Component {
             isNotLike: false,
             orderField: 'up',
             orderType: 'DESC',
+            allTags: [],
         }
         // this.localIndex = this.props.match.params.pageIndex;
     }
@@ -29,18 +30,30 @@ export default class VideoList extends Component {
     componentDidMount() {
         // this.localIndex = this.props.match.params.pageIndex;
         // console.log("this.localIndex =" + this.localIndex);
-        this.getUrl(this.state.current, this.state.orderType, this.state.orderField);
+        this.getUrl(this.state.current, this.state.orderType, this.state.orderField, null);
         // this.getUrl(this.localIndex);
         // this.jump(this.localIndex);
+        this.getAllTags();
         this.timerId = setInterval(() => this.heartBeat(), 5000);
     }
-    
-    
+
+
     componentWillUnmount() {
         clearInterval(this.timerId)
     }
 
-     heartBeat() {
+    getAllTags = () => {
+        axios.get(api + '/video/all/tags', {}).then((res) => {
+            console.log("所有tag:", res.data.data)
+            this.setState({
+                allTags: res.data.data
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    heartBeat() {
         console.log("beat:", new Date());
         axios.get(api + '/video/heartbeat', {}).then((res) => {
         }).catch(function (error) {
@@ -50,14 +63,14 @@ export default class VideoList extends Component {
 
     changeSortField = (orderField, orderType) => {
         console.log("排序:" + orderField + "+" + orderType);
-        this.getUrl(this.state.current, orderType, orderField);
+        this.getUrl(this.state.current, orderType, orderField, null);
     };
 
     changePageSize = (pageNumber) => {
-        this.getUrl(pageNumber, this.state.orderType, this.state.orderField);
+        this.getUrl(pageNumber, this.state.orderType, this.state.orderField, null);
     }
 
-    getUrl = (pageNumber, orderType, orderField) => {
+    getUrl = (pageNumber, orderType, orderField, tagId) => {
         this.setState({
             current: pageNumber
         });
@@ -66,6 +79,7 @@ export default class VideoList extends Component {
                 pageIndex: pageNumber,
                 pageSize: 20,
                 orderType: orderType,
+                tagId: tagId,
                 orderField: orderField
             }
         }).then((res) => {
@@ -125,6 +139,7 @@ export default class VideoList extends Component {
                             </a>
                         </div>
                     </div>
+
                     <div className="sortField">
                         <span>好评</span>
                         <div className="sortFont">
@@ -141,6 +156,14 @@ export default class VideoList extends Component {
 
                         </div>
                     </div>
+                </div>
+                <div className="search-tags">
+                    {
+                        this.state.allTags.map(item => (
+                            <Tag color="orange"
+                                 onClick={()=>this.getUrl(this.state.current, this.state.orderType, this.state.orderField, item.id)}>{item.name}</Tag>
+                        ))
+                    }
                 </div>
                 <div>
                     {

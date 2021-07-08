@@ -32,6 +32,14 @@
 .tag-list{
     margin: 10px 20px;
 }
+.search-tags{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
 .write-tags{
     width: 300px;
 }

@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2eca37c0-a274-43e3-bd3d-afddccff19c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/style/video.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/video.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/videoPlay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/videoPlay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/videoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/videoList.js" afterDir="false" />
     </list>
     <list id="96ee33eb-c1c2-4cff-a624-ffedb49d0d49" name="ignore" comment="">
       <change beforePath="$PROJECT_DIR$/src/common/commonData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/commonData.js" afterDir="false" />
@@ -120,7 +119,7 @@
       <workItem from="1606919047281" duration="635000" />
       <workItem from="1607096431285" duration="974000" />
       <workItem from="1625664706828" duration="3327000" />
-      <workItem from="1625749494092" duration="3838000" />
+      <workItem from="1625749494092" duration="6338000" />
     </task>
     <task id="LOCAL-00001" summary="视频预览和播放,修改">
       <created>1589107696691</created>
@@ -206,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625390931471</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="大tag">
+      <created>1625753390148</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1625753390148</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,13 +243,14 @@
     <MESSAGE value="可以返回上个页面" />
     <MESSAGE value="fenye" />
     <MESSAGE value="使用知乎的griffith播放器" />
-    <option name="LAST_COMMIT_MESSAGE" value="使用知乎的griffith播放器" />
+    <MESSAGE value="大tag" />
+    <option name="LAST_COMMIT_MESSAGE" value="大tag" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="84" key="CommitChangelistDialog2" timestamp="1625390930063">
+    <state x="558" y="84" key="CommitChangelistDialog2" timestamp="1625753388780">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="84" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390930063" />
+    <state x="558" y="84" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625753388780" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1625750865003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -264,10 +271,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625669437004" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1625390933517">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1625753391678">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625390933517" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625753391678" />
+    <state x="1920" y="0" width="1414" height="1027" key="dock-window-1" timestamp="1625754720140">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1920" y="0" width="1414" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1625754720140" />
     <state x="662" y="252" width="596" height="536" key="find.popup" timestamp="1625750459856">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
