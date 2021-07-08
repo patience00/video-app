@@ -67,7 +67,7 @@ export default class VideoPlay extends Component {
 
         console.log("已存在tag:" , this.state.curTags);
         console.log("添加tag:" , this.state.chooseTag);
-        let allTag = this.state.curTags.concat(this.state.chooseTag);
+        let allTag = this.state.chooseTag.concat(this.state.curTags);
         console.log("所有tag:", allTag);
         axios.put(api + '/video/tag', {
             id: id,
@@ -246,7 +246,7 @@ export default class VideoPlay extends Component {
                 </div>
                 <div className="tag-list">
                     {
-                        this.state.curTags===null? this.state.curTags.map(item => (
+                        this.state.curTags!=null? this.state.curTags.map(item => (
                             <Tag color={this.colorArray[Math.floor(Math.random() * 10)]}>{item}</Tag>
                         )) : null
                     }
