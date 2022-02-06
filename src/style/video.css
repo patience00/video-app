@@ -1,10 +1,11 @@
-.cardList{
+.cardList {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.videoContainer{
+
+.videoContainer {
     /*margin-left:50%;*/
     /*width: 100%;*/
     display: flex;
@@ -14,25 +15,49 @@
 
 }
 
-.sortFont{
-    font-size: 30px;
+.sortText {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    /*background-color: #0088cc;*/
+    /*color: white;*/
+}
+
+.sortFont {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sortFont span {
+    margin-top: 5px;
+    /*margin-bottom: -20px;*/
+    height: 10px;
+}
+
+.sortFont span:hover {
+    color: #0088cc;
+    /*margin-bottom: -20px;*/
 
 }
 
-.sortField{
+.sortField {
+    height: 45px;
     display: flex;
     flex-direction: row;
 }
-.sortBox{
+
+.sortBox {
     display: flex;
     flex-direction: row;
 }
-.tag-list{
+
+.tag-list {
     margin: 10px 20px;
 }
-.search-tags{
+
+.search-tags {
     width: 300px;
     display: flex;
     justify-content: center;
@@ -40,6 +65,7 @@
     align-items: center;
     flex-wrap: wrap;
 }
-.write-tags{
+
+.write-tags {
     width: 300px;
 }

@@ -125,37 +125,54 @@ export default class VideoList extends Component {
             <div className="cardList">
                 <div className="sortBox">
                     <div className="sortField">
-                        <span>创建时间</span>
+                        <span className="sortText">创建时间</span>
                         <div className="sortFont">
-                            <a href="#" onClick={() => this.changeSortField('createTime', 'ASC')}>
+                            <span onClick={() => this.changeSortField('createTime', 'ASC')}>
                                 <svg className="icon" aria-hidden="true">
                                     <use xlinkHref="#icon-arrow-up-filling"></use>
                                 </svg>
-                            </a>
-                            <a href="#" onClick={() => this.changeSortField('createTime', 'DESC')}>
+                            </span>
+                            <span onClick={() => this.changeSortField('createTime', 'DESC')}>
                                 <svg className="icon" aria-hidden="true">
                                     <use xlinkHref="#icon-arrow-down-filling"></use>
                                 </svg>
-                            </a>
+                            </span>
                         </div>
                     </div>
 
                     <div className="sortField">
-                        <span>好评</span>
+                        <span className="sortText">好评</span>
                         <div className="sortFont">
-                            <a href="#" onClick={() => this.changeSortField('up', 'ASC')}>
+                            <span onClick={() => this.changeSortField('up', 'ASC')}>
                                 <svg className="icon" aria-hidden="true">
                                     <use xlinkHref="#icon-arrow-up-filling"></use>
                                 </svg>
-                            </a>
-                            <a href="#" onClick={() => this.changeSortField('up', 'DESC')}>
+                            </span>
+                            <span onClick={() => this.changeSortField('up', 'DESC')}>
                                 <svg className="icon" aria-hidden="true">
                                     <use xlinkHref="#icon-arrow-down-filling"></use>
                                 </svg>
-                            </a>
+                            </span>
 
                         </div>
                     </div>
+                    <div className="sortField">
+                        <span className="sortText">播放次数</span>
+                        <div className="sortFont">
+                            <span onClick={() => this.changeSortField('viewTime', 'ASC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-up-filling"></use>
+                                </svg>
+                            </span>
+                            <span onClick={() => this.changeSortField('viewTime', 'DESC')}>
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-arrow-down-filling"></use>
+                                </svg>
+                            </span>
+
+                        </div>
+                    </div>
+
                 </div>
                 <div className="search-tags">
                     {
