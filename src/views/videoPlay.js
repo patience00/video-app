@@ -87,9 +87,11 @@ export default class VideoPlay extends Component {
         const id = this.idStack[0];
         this.setState({curId: id})
         console.log("视频id:" + id);
+        const that = this;
         axios.get(api + '/video/' + id, {})
             .then((response) => {
-                this.setState({
+                console.log(this);
+                that.setState({
                     url: response.data.data.url,
                     curTags: response.data.data.tags
                 })
