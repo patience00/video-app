@@ -3,7 +3,8 @@ import {Icon, InputNumber, Button, Tag, Row, Select} from 'antd';
 import {api} from '../common/commonData';
 import axios from 'axios';
 import '../style/video.css';
-import Player from 'griffith';
+import videoList from "./videoList";
+// import Player from 'griffith';
 
 export default class VideoPlay extends Component {
 
@@ -217,17 +218,19 @@ export default class VideoPlay extends Component {
             <div className="videoContainer">
                 {
                     this.state.url
-                        ? <Player id={this.props.match.params.id}
-                                  sources={{
-                                      hd: {
-                                          play_url: this.state.url
-                                      },
-                                      sd: {
-                                          play_url: this.state.url,
-                                      },
-                                  }}
-                                  defaultQuality='hd'
-                        />
+                        ?
+                        // <Player id={this.props.match.params.id}
+                        //           sources={{
+                        //               hd: {
+                        //                   play_url: this.state.url
+                        //               },
+                        //               sd: {
+                        //                   play_url: this.state.url,
+                        //               },
+                        //           }}
+                        //           defaultQuality='hd'
+                        // />
+                        <video src={this.state.url} controls></video>
                         : null
                 }
                 <div>好评率：{this.state.curScore}%</div>
