@@ -63,6 +63,10 @@ export default class VideoList extends Component {
 
     changeSortField = (orderField, orderType) => {
         console.log("排序:" + orderField + "+" + orderType);
+        this.setState({
+            orderField:orderField,
+            orderType:orderType
+        })
         this.getUrl(this.state.current, orderType, orderField, null);
     };
 
