@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Icon, Pagination, Tag} from 'antd';
+import {Card, Input, Icon, Pagination, Tag} from 'antd';
 import axios from 'axios';
 import '../style/video.css';
 import {api} from '../common/commonData';
@@ -30,7 +30,7 @@ export default class VideoList extends Component {
     componentDidMount() {
         // this.localIndex = this.props.match.params.pageIndex;
         // console.log("this.localIndex =" + this.localIndex);
-        this.getUrl(this.state.current, this.state.orderType, this.state.orderField, null);
+        this.getList(this.state.current, this.state.orderType, this.state.orderField, null);
         // this.getUrl(this.localIndex);
         // this.jump(this.localIndex);
         this.getAllTags();
@@ -64,17 +64,17 @@ export default class VideoList extends Component {
     changeSortField = (orderField, orderType) => {
         console.log("排序:" + orderField + "+" + orderType);
         this.setState({
-            orderField:orderField,
-            orderType:orderType
+            orderField: orderField,
+            orderType: orderType
         })
-        this.getUrl(this.state.current, orderType, orderField, null);
+        this.getList(this.state.current, orderType, orderField, null);
     };
 
     changePageSize = (pageNumber) => {
-        this.getUrl(pageNumber, this.state.orderType, this.state.orderField, null);
+        this.getList(pageNumber, this.state.orderType, this.state.orderField, null);
     }
 
-    getUrl = (pageNumber, orderType, orderField, tagId) => {
+    getList = (pageNumber, orderType, orderField, tagId) => {
         this.setState({
             current: pageNumber
         });
@@ -97,6 +97,30 @@ export default class VideoList extends Component {
             console.log(error);
         });
     }
+
+
+    searchList = (e) => {
+        axios.get(api + '/video/search/page', {
+            params: {
+                name: e.target.value,
+                pageIndex: 1,
+                pageSize: 20,
+                orderType: this.state.orderType,
+                orderField: this.state.orderField
+            }
+        }).then((res) => {
+            this.setState({
+                curList: res.data.data.data,
+                total: res.data.data.count,
+                curVideoIndex: 0,
+                tempPage: 0
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+
 
     jump = (id) => {
         localStorage.setItem('videoPage', this.state.current);
@@ -125,99 +149,107 @@ export default class VideoList extends Component {
 
     render() {
         console.log(this.state.current)
+        const {Search} = Input;
+
         return (
-            <div className="cardList">
-                <div className="sortBox">
-                    <div className="sortField">
-                        <span className="sortText">创建时间</span>
-                        <div className="sortFont">
-                            <span onClick={() => this.changeSortField('createTime', 'ASC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-up-filling"></use>
-                                </svg>
-                            </span>
-                            <span onClick={() => this.changeSortField('createTime', 'DESC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-down-filling"></use>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="sortField">
-                        <span className="sortText">好评</span>
-                        <div className="sortFont">
-                            <span onClick={() => this.changeSortField('up', 'ASC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-up-filling"></use>
-                                </svg>
-                            </span>
-                            <span onClick={() => this.changeSortField('up', 'DESC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-down-filling"></use>
-                                </svg>
-                            </span>
-
-                        </div>
-                    </div>
-                    <div className="sortField">
-                        <span className="sortText">播放次数</span>
-                        <div className="sortFont">
-                            <span onClick={() => this.changeSortField('viewTime', 'ASC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-up-filling"></use>
-                                </svg>
-                            </span>
-                            <span onClick={() => this.changeSortField('viewTime', 'DESC')}>
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-arrow-down-filling"></use>
-                                </svg>
-                            </span>
-
-                        </div>
-                    </div>
-
+            <div>
+                <div className="videoSearch">
+                    <Search placeholder={'请输入关键字'} enterButton="Search" allowClear={true} onPressEnter={this.searchList}/>
                 </div>
-                <div className="search-tags">
-                    {
-                        this.state.allTags.map(item => (
-                            <Tag color="orange"
-                                 onClick={()=>this.getUrl(this.state.current, this.state.orderType, this.state.orderField, item.id)}>{item.name}</Tag>
-                        ))
-                    }
-                </div>
-                <div>
-                    {
-                        this.state.curList.map(item => (
-                            <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
-                                  key={item.name}
-                                  onClick={() => this.jump(item.id)}
-                                  title={item.name}
-                                  cover={<img alt="example" src={item.image}/>}
-                                  type={'inner'}>
-                                <div className="ls-title article-title">
-                                    <span>
-                                        {item.viewTime}次观看
-                                    </span>
-                                    <span>
-                                         <Icon type="like" style={{fontSize: '20px', color: '#08c'}}
-                                               theme={'outlined'}/>
-                                               <span>
-                                                   {item.rate}%
-                                               </span>
-                                    </span>
-                                </div>
-                            </Card>
-                        ))
-                    }
-                </div>
-                <div className="ls-pageBox">
-                    <Pagination current={this.state.current}
-                                pageSize={this.state.pageSize}
-                                showSizeChanger
-                                onShowSizeChange={this.onShowSizeChange}
-                                showQuickJumper total={this.state.total}
-                                onChange={this.changePageSize}/>
+                <div className="cardList">
+                    <div className="sortBox">
+                        <div className="sortField">
+                            <span className="sortText">创建时间</span>
+                            <div className="sortFont">
+                                <span onClick={() => this.changeSortField('createTime', 'ASC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-up-filling"></use>
+                                    </svg>
+                                </span>
+                                <span onClick={() => this.changeSortField('createTime', 'DESC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-down-filling"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="sortField">
+                            <span className="sortText">好评</span>
+                            <div className="sortFont">
+                                <span onClick={() => this.changeSortField('up', 'ASC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-up-filling"></use>
+                                    </svg>
+                                </span>
+                                <span onClick={() => this.changeSortField('up', 'DESC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-down-filling"></use>
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </div>
+                        <div className="sortField">
+                            <span className="sortText">播放次数</span>
+                            <div className="sortFont">
+                                <span onClick={() => this.changeSortField('viewTime', 'ASC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-up-filling"></use>
+                                    </svg>
+                                </span>
+                                <span onClick={() => this.changeSortField('viewTime', 'DESC')}>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-arrow-down-filling"></use>
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="search-tags">
+                        {
+                            this.state.allTags.map(item => (
+                                <Tag color="orange"
+                                     onClick={() => this.getList(this.state.current, this.state.orderType, this.state.orderField, item.id)}>{item.name}</Tag>
+                            ))
+                        }
+                    </div>
+                    <div>
+                        {
+                            this.state.curList.map(item => (
+                                <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
+                                      key={item.name}
+                                      onClick={() => this.jump(item.id)}
+                                      // title={item.name}
+                                      title={<span dangerouslySetInnerHTML={{__html: item.name}}></span>}
+                                      cover={<img alt="example" src={item.image}/>}
+                                      type={'inner'}>
+                                    <div className="ls-title article-title">
+                                        <span>
+                                            {item.viewTime}次观看
+                                        </span>
+                                        <span>
+                                             <Icon type="like" style={{fontSize: '20px', color: '#08c'}}
+                                                   theme={'outlined'}/>
+                                                   <span>
+                                                       {item.rate}%
+                                                   </span>
+                                        </span>
+                                    </div>
+                                </Card>
+                            ))
+                        }
+                    </div>
+                    <div className="ls-pageBox">
+                        <Pagination current={this.state.current}
+                                    pageSize={this.state.pageSize}
+                                    showSizeChanger
+                                    onShowSizeChange={this.onShowSizeChange}
+                                    showQuickJumper total={this.state.total}
+                                    onChange={this.changePageSize}/>
+                    </div>
                 </div>
             </div>
         );
