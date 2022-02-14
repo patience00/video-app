@@ -23,6 +23,7 @@ export default class VideoList extends Component {
             orderField: 'up',
             orderType: 'DESC',
             allTags: [],
+            tagId: null
         }
         // this.localIndex = this.props.match.params.pageIndex;
     }
@@ -98,6 +99,14 @@ export default class VideoList extends Component {
         });
     }
 
+    searchTag = (id) => {
+        this.setState({
+                tagId: id
+            }
+        )
+        this.getList(1, this.state.orderType, this.state.orderField, id);
+    }
+
 
     searchList = (e) => {
         axios.get(api + '/video/search/page', {
@@ -119,7 +128,6 @@ export default class VideoList extends Component {
             console.log(error);
         });
     }
-
 
 
     jump = (id) => {
@@ -154,7 +162,8 @@ export default class VideoList extends Component {
         return (
             <div>
                 <div className="videoSearch">
-                    <Search placeholder={'请输入关键字'} enterButton="Search" allowClear={true} onPressEnter={this.searchList}/>
+                    <Search placeholder={'请输入关键字'} enterButton="Search" allowClear={true}
+                            onPressEnter={this.searchList}/>
                 </div>
                 <div className="cardList">
                     <div className="sortBox">
@@ -212,7 +221,8 @@ export default class VideoList extends Component {
                         {
                             this.state.allTags.map(item => (
                                 <Tag color="orange"
-                                     onClick={() => this.getList(this.state.current, this.state.orderType, this.state.orderField, item.id)}>{item.name}</Tag>
+                                     onClick={() => this.searchTag}>{item.name}
+                                </Tag>
                             ))
                         }
                     </div>
@@ -222,7 +232,7 @@ export default class VideoList extends Component {
                                 <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
                                       key={item.name}
                                       onClick={() => this.jump(item.id)}
-                                      // title={item.name}
+                                    // title={item.name}
                                       title={<span dangerouslySetInnerHTML={{__html: item.name}}></span>}
                                       cover={<img alt="example" src={item.image}/>}
                                       type={'inner'}>
