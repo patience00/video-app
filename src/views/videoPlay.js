@@ -214,7 +214,7 @@ export default class VideoPlay extends Component {
 
 
     render() {
-
+        let offsetWidth = document.querySelector('body').offsetWidth;
         return (
             <div className="videoContainer">
                 <h2>{this.state.name}</h2>
@@ -232,7 +232,7 @@ export default class VideoPlay extends Component {
                         //           }}
                         //           defaultQuality='hd'
                         // />
-                        <video src={this.state.url} controls></video>
+                        <video src={this.state.url} controls width={offsetWidth}></video>
                         : null
                 }
                 <div>好评率：{this.state.curScore}%</div>
