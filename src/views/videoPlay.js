@@ -104,7 +104,6 @@ export default class VideoPlay extends Component {
     }
 
     heartBeat() {
-        console.log("beat:", new Date());
         axios.get(api + '/video/heartbeat', {}).then((res) => {
         }).catch(function (error) {
             console.log(error);

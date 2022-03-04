@@ -55,7 +55,6 @@ export default class VideoList extends Component {
     }
 
     heartBeat() {
-        console.log("beat:", new Date());
         axios.get(api + '/video/heartbeat', {}).then((res) => {
         }).catch(function (error) {
             console.log(error);
@@ -104,6 +103,7 @@ export default class VideoList extends Component {
                 tagId: id
             }
         )
+        console.log("------------")
         this.getList(1, this.state.orderType, this.state.orderField, id);
     }
 
@@ -220,8 +220,7 @@ export default class VideoList extends Component {
                     <div className="search-tags">
                         {
                             this.state.allTags.map(item => (
-                                <Tag color="orange"
-                                     onClick={() => this.searchTag}>{item.name}
+                                <Tag color="orange" onClick={() => this.searchTag(item.id)}>{item.name}
                                 </Tag>
                             ))
                         }
@@ -230,7 +229,7 @@ export default class VideoList extends Component {
                         {
                             this.state.curList.map(item => (
                                 <Card bordered={true} style={{width: 300, marginTop: 20}} hoverable={true}
-                                      key={item.name}
+                                      key={item.name+item.id}
                                       onClick={() => this.jump(item.id)}
                                     // title={item.name}
                                       title={<span dangerouslySetInnerHTML={{__html: item.name}}></span>}
